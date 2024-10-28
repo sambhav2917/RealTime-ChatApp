@@ -85,4 +85,33 @@ const login = async (req, res) => {
   }
 };
 
-export { register, login };
+const setAvatar = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const avatarImage = req.body.image;
+
+    const userData = await User.findByIdAndUpdate(
+      userId,
+      {
+        isAvatarImageSet: true,
+        avatarImage,
+      },
+      { new: true }
+    );
+
+    return res.status(200).json(
+      {
+        isSet: userData.isAvatarImageSet,
+        image: userData.avatarImage,
+      }
+    )
+  } catch (error) {
+    console.error("Error in setAvatar function:", error.message);
+    res.status(500).json({ message: "Internal server error" });
+  }
+
+
+}
+
+
+export { register, login,setAvatar };

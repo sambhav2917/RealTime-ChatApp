@@ -1,0 +1,58 @@
+/* SetAvatar.css */
+
+.title-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.title-container h1 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.avatars {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 20px;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+}
+
+.avatar.selected {
+    border-color: #4CAF50; /* Highlight selected avatar */
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.avatar img:hover {
+    transform: scale(1.2);
+}
