@@ -1,5 +1,13 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
+const createToken = (id) => {
+  if (!process.env.JWT_SECRET) {
+    throw new Error("JWT_SECRET is not set in the environment variables.");
+  }
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+};
 
 const register = async (req, res) => {
   try {
@@ -19,8 +27,8 @@ const register = async (req, res) => {
       return res.status(409).json({ message: "Email already exists" });
     }
 
-    const salt = await bcrypt.genSalt(10); // Asynchronous salt generation
-    const hash = await bcrypt.hash(password, salt); // Asynchronous hashing
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
 
     const newUser = new User({
       username,
@@ -30,7 +38,6 @@ const register = async (req, res) => {
 
     await newUser.save();
 
-    // Exclude sensitive data like password in the response
     const userResponse = {
       id: newUser._id,
       username: newUser.username,
@@ -39,43 +46,43 @@ const register = async (req, res) => {
 
     res.status(201).json({ message: "User created successfully", user: userResponse });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error", error });
+    console.error("Error in register function:", error.message);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
-
 const login = async (req, res) => {
-    try {
-      const { username, password } = req.body;
+  try {
+    const { username, password } = req.body;
 
-      if (!username || !password) {
-        return res.status(400).json({ message: "All fields are required" });
-      }
-      const user = await User.findOne({ username });
-      if (!user) {
-        return res.status(404).json({ message: "User not found" });
-      }
-
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
-        return res.status(401).json({ message: "Invalid credentials" });
-      }
-
-      // Exclude sensitive data like password in the response
-      const userResponse = {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-      };
-
-      return res.status(200).json({ message: "User logged in successfully", user: userResponse });
-      
-
-    } catch (error) {
-      
+    if (!username || !password) {
+      return res.status(400).json({ message: "All fields are required" });
     }
 
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    const token = createToken(user._id);
+
+    const userResponse = {
+      id: user._id,
+      username: user.username,
+      email: user.email,
+    };
+
+    res.cookie("jwt", token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
+    return res.status(200).json({ message: "User logged in successfully", user: userResponse });
+  } catch (error) {
+    console.error("Error in login function:", error.message);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 export { register, login };

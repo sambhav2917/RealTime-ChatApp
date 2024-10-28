@@ -43,7 +43,7 @@ export default function Login() {
       const response = await axios.post(LoginRoute, {
         username: formData.username,
         password: formData.password,
-      });
+      },{ withCredentials: true });
 
       const { data } = response; // Access the response data
 
@@ -54,12 +54,13 @@ export default function Login() {
       }
 
       if (response.status >= 200  && response.status < 300) {
-        localStorage.setItem("chat-app-user", JSON.stringify(data.user));
+       /*  localStorage.setItem("chat-app-user", JSON.stringify(data.user)); */
         toast.success(data.message, toastOptions);
         navigate("/"); // Redirect after successful registration
       }
     } catch (error) {
-      toast.error(error.response.data.message, toastOptions);
+      const errorMessage = error.response?.data?.message || "An error occurred";
+      toast.error(errorMessage, toastOptions);
     }
    
   };
