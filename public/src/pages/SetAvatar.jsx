@@ -31,6 +31,7 @@ export default function SetAvatar() {
             toast.error("Please select an avatar", toastOptions);
         } else {
             console.log("Avatar selected:", selectedAvatar);
+           
             // Additional logic for setting profile picture
             const user=JSON.parse(localStorage.getItem("chat-app-user"));
             console.log("User:", user.id);

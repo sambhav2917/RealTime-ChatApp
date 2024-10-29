@@ -113,5 +113,21 @@ const setAvatar = async (req, res) => {
 
 }
 
+const allUsers = async (req, res) => {
+  try {
+    console.log("allUsers function called");
+    const users = await User.find({ _id: { $ne: req.params.id } }).select([
+      "email",
+      "username",
+      "avatarImage",
+      "_id",
+    ]);
+    return res.status(200).json(users);
+  } catch (error) {
+    console.error("Error in allUsers function:", error.message);
+    res.status(500).json({ message: "Internal server error" });
+  } 
+}
 
-export { register, login,setAvatar };
+
+export { register, login,setAvatar,allUsers };

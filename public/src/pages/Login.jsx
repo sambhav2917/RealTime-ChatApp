@@ -54,9 +54,10 @@ export default function Login() {
       }
 
       if (response.status >= 200  && response.status < 300) {
-       /*  localStorage.setItem("chat-app-user", JSON.stringify(data.user)); */
+        localStorage.setItem("chat-app-user", JSON.stringify(data.user));
+       
         toast.success(data.message, toastOptions);
-        navigate("/"); // Redirect after successful registration
+        navigate("/setavatar"); // Redirect after successful registration
       }
     } catch (error) {
       const errorMessage = error.response?.data?.message || "An error occurred";
