@@ -12,14 +12,13 @@
     max-width: 300px; /* Set a maximum width for the contact section */
     background-color: #ffffff;
     border-right: 1px solid #e0e0e0;
-    padding: 20px;
+  
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .chat-main-container {
     flex: 3; /* Takes up the remaining part of the container */
     background-color: #f9f9f9;
-    padding: 20px;
     display: flex;
     flex-direction: column;
 }

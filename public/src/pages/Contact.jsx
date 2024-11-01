@@ -38,6 +38,8 @@ export default function Contact({ contacts, CurrentUser, handleChatchange }) {
               <h3>{contact.username}</h3>
             </div>
           ))}
+
+          
         </div>
         <div className="current-user">
           <div className="avatar">

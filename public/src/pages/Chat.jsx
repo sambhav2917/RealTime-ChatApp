@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AllUsersRoute } from "../utils/ApiRoutes";
 import Contact from "./Contact";
 import Welcome from "./Welcome";
+import ChatContainer from "./ChatContainer";
 
 export default function Chat() {
     const navigate = useNavigate();
@@ -48,8 +49,11 @@ export default function Chat() {
               
             </div>
             <div className="chat-main-container">
-                <Welcome user={CurrentUser} />
-                {/* Add chat messages and input here */}
+                {
+                    currentChat
+                        ? <ChatContainer CurrentUser={CurrentUser} currentChat={currentChat} />
+                        : <Welcome user={CurrentUser} />
+                }
             </div>
         </div>
     );

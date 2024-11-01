@@ -1,5 +1,14 @@
 /* Contact.css */
 
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
 .container {
     display: flex;
     flex-direction: column;
@@ -11,7 +20,7 @@
     flex: 1; /* Takes up remaining space above the fixed section */
     overflow-y: auto; /* Enables scrolling within the contact list */
     padding: 20px; /* Increased padding for better spacing */
-    margin-bottom: 70px; /* Space to avoid overlapping the current user section */
+    
     background-color: #ffffff; /* Add background color for better contrast */
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
