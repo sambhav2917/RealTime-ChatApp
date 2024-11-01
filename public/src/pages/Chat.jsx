@@ -4,12 +4,16 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AllUsersRoute } from "../utils/ApiRoutes";
 import Contact from "./Contact";
+import Welcome from "./Welcome";
 
 export default function Chat() {
     const navigate = useNavigate();
     const [contracts, setContracts] = useState([]);
     const [CurrentUser, setCurrentUser] = useState(undefined);
-
+    const [currentChat, setCurrentChat] = useState(undefined);
+    const handleChatchange=(chat)=>{
+        setCurrentChat(chat);
+    }
     useEffect(() => {
         if (!localStorage.getItem("chat-app-user")) {
             console.log("User not logged in");
@@ -39,12 +43,12 @@ export default function Chat() {
     return (
         <div className="chat-container">
             <div className="chat-contact-container">
-            <h1>contracts</h1>
-                <Contact contacts={contracts} />
+           
+                <Contact contacts={contracts}  CurrentUser={CurrentUser} handleChatchange={handleChatchange}/>
               
             </div>
             <div className="chat-main-container">
-                <h2>Chat</h2>
+                <Welcome user={CurrentUser} />
                 {/* Add chat messages and input here */}
             </div>
         </div>

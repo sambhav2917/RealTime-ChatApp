@@ -115,7 +115,7 @@ const setAvatar = async (req, res) => {
 
 const allUsers = async (req, res) => {
   try {
-    console.log("allUsers function called");
+    
     const users = await User.find({ _id: { $ne: req.params.id } }).select([
       "email",
       "username",

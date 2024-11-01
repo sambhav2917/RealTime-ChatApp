@@ -1,0 +1,44 @@
+/* Style the main container */
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f4f8;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    height: 90%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  /* Style the GIF */
+  .welcome-container img {
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Style the welcome message */
+  .welcome-message h1 {
+    font-size: 2rem;
+    color: #3a3b3c;
+    margin: 10px 0;
+  }
+  
+  /* Style the username span within the welcome message */
+  .welcome-message .username {
+    color: #0077ff;
+    font-weight: bold;
+  }
+  
+  /* Style the prompt text */
+  .welcome-container h3 {
+    color: #5a5a5a;
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-top: 10px;
+  }
+  
