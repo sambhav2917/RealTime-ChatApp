@@ -1,38 +1,94 @@
-import express from 'express'
-import cors from 'cors'
-import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-import userRouter from './routers/userRoutes.js'
-import apiRouter from './routers/apiRoutes.js'
-const app = express()
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
+import userRouter from './routers/userRoutes.js';
+import apiRouter from './routers/apiRoutes.js';
+import messageRouter from './routers/messagesRoute.js';
+import { on } from 'events';
 
-dotenv.config()
+dotenv.config();
 
+const app = express();
+const httpServer = createServer(app);
+
+// CORS configuration
 const corsOptions = {
     origin: 'http://localhost:5173', // Your frontend URL
     credentials: true, // Allow credentials (cookies)
 };
-  
 
-
-
-app.use(express.json())
+// Middleware
+app.use(express.json());
 app.use(cors(corsOptions));
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 
+// Routes
+app.use('/api/auth', userRouter);
+app.use('/proxy', apiRouter);
+app.use('/api/message', messageRouter);
 
-app.use('/api/auth', userRouter)
-app.use('/proxy',apiRouter)
-
-
-
+// MongoDB connection
 mongoose.connect(process.env.MONGO_URI).then(() => {
-    console.log('Connected to MongoDB')
+    console.log('Connected to MongoDB');
 }).catch(error => {
-    console.log(error)
-})
+    console.log(error);
+});
 
-const Port=process.env.PORT || 5000;
-app.listen(Port, () => {
-    console.log(`Server is running on port ${Port}`)
-})
+// Socket.io setup
+const io = new Server(httpServer, {
+    cors: {
+        origin: 'http://localhost:5173',
+        credentials: true,
+    }
+});
+
+global.onlineUser= new Map();
+
+io.on('connection', (socket) => {
+    console.log(`User connected: ${socket.id}`);
+
+    global.chatSocket = socket;
+
+    // Add user to online users map
+    socket.on('add-user', (userId) => {
+        onlineUser.set(userId, socket.id);
+        console.log(`User added: ${userId}, Socket ID: ${socket.id}`);
+    });
+    
+    socket.on('send-msg', (data) => {
+        const sendUserSocket = onlineUser.get(data.to);
+        console.log('Message sent:', data); // Log the sent message
+        if (sendUserSocket) {
+            socket.to(sendUserSocket).emit('msg-receive', {
+                message: data.message
+            });
+            console.log(`Message sent to ${data.to}: ${data.message}`);
+        } else {
+            console.log(`User ${data.to} is not online`);
+        }
+    });
+    
+
+    // Handle disconnection
+    
+    socket.on('disconnect', () => {
+    console.log(`User disconnected: ${socket.id}`);
+    // Remove user from onlineUser map
+    onlineUser.forEach((value, key) => {
+        if (value === socket.id) {
+            onlineUser.delete(key);
+        }
+    });
+});
+
+});
+
+
+// Start server
+const Port = process.env.PORT || 5000;
+httpServer.listen(Port, () => {
+    console.log(`Server is running on port ${Port}`);
+});

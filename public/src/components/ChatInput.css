@@ -1,0 +1,50 @@
+.input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px; /* Add some space between input and button */
+    width: 100%; /* Ensures the container itself is responsive */
+    padding: 5px; /* Adds padding for spacing */
+}
+
+.input-container input {
+    flex-grow: 1; /* Allows input to take up available space */
+    width: 80%; /* Ensures a reactive width */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box; /* Prevents padding from affecting width */
+}
+
+.input-container button {
+    cursor: pointer;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4a76a8;
+    color: white;
+    font-weight: bold;
+}
+
+.emoji{
+    cursor: pointer;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+   
+    color:black;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.emoji-picker {
+    position: absolute;
+    top: 62%; /* Adjust based on your desired placement */
+    left: 29.2%; /* Adjust to center or align as needed */
+    transform: translate(-50%, -50%); /* Centers the picker relative to viewport */
+    z-index: 1000; /* Keeps it on top of other elements */
+    overflow: auto;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: white;
+}

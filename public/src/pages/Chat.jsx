@@ -1,13 +1,15 @@
 import "./Chat.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { AllUsersRoute } from "../utils/ApiRoutes";
+import { AllUsersRoute ,host} from "../utils/ApiRoutes";
 import Contact from "../components/Contact";
 import Welcome from "../components/Welcome";
 import ChatContainer from "../components/ChatContainer";
+import {io} from 'socket.io-client';
 
 export default function Chat() {
+    const socket = useRef();
     const navigate = useNavigate();
     const [contracts, setContracts] = useState([]);
     const [CurrentUser, setCurrentUser] = useState(undefined);
@@ -28,13 +30,25 @@ export default function Chat() {
     }, [navigate]);
 
     useEffect(() => {
+        if (CurrentUser) {
+            socket.current = io(host);
+
+            // Emit the add-user event when connected
+            socket.current.on('connect', () => {
+                console.log('Socket connected:', socket.current.id);
+                socket.current.emit("add-user", CurrentUser.id);
+            });
+        }
+    }, [CurrentUser]);
+
+    useEffect(() => {
         const fetchContracts = async () => {
             
                 if (!CurrentUser) {return;}
                 try {
                     const { data } = await axios.get(`${AllUsersRoute}/${CurrentUser.id}`);
                     setContracts(data);
-                    console.log(data);
+                   
                 } catch (error) {
                     console.error("Failed to fetch contracts:", error);
                 }
@@ -54,7 +68,7 @@ export default function Chat() {
             <div className="chat-main-container">
                 {
                    !isLoading && currentChat
-                        ? <ChatContainer  currentChat={currentChat} />
+                        ? <ChatContainer  currentChat={currentChat}  CurrentUser={CurrentUser}  socket={socket}/>
                         : <Welcome user={CurrentUser} />
                 }
             </div>
