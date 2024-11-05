@@ -1,0 +1,83 @@
+/* Container for the Login page */
+.login-container {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    height: 100vh;
+   /*  background-color: #a6d8f3; */ /* Light blue background */
+}
+
+/* Image container styling */
+.image-container {
+    width: 400px; /* Set width to match the form */
+    margin-right: 20px; /* Space between image and form */
+}
+
+.image-container img {
+    width: 100%; /* Set image width to 100% to fit the container */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Optional: Rounded corners for the image */
+}
+
+/* Form container styling */
+.form-container {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    background-color: white; /* White background for form */
+    padding: 30px;
+    border-radius: 10px; /* Rounded corners for the form */
+    width: 300px; /* Fixed width */
+    height: 400px;
+}
+
+/* General input and button styling */
+input {
+    width: 95%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0077cc; /* Button background color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #005f99; /* Darker button color on hover */
+}
+
+/* Logo styling */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Link styling */
+span {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+}
+
+span a {
+    color: #0077cc;
+    text-decoration: none;
+}
+
+span a:hover {
+    text-decoration: underline;
+}
+
+.img-and-form-container{
+    display: flex;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Box shadow for the form */
+}

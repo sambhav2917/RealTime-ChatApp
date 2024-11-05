@@ -6,14 +6,13 @@ import { LoginRoute } from "../utils/ApiRoutes";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
-
 export default function Login() {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
   
-  const navigate = useNavigate(); // Fix: call useNavigate hook to get navigate function
+  const navigate = useNavigate();
 
   const toastOptions = {
     position: "top-right",
@@ -39,31 +38,27 @@ export default function Login() {
     if (!handleValidation()) return;
 
     try {
-      // Send the registration request and check response status directly
       const response = await axios.post(LoginRoute, {
         username: formData.username,
         password: formData.password,
       },{ withCredentials: true });
 
-      const { data } = response; // Access the response data
+      const { data } = response;
 
-      // Check response status instead of data.status
       if (response.status >= 400) {
         toast.error(data.message, toastOptions);
         return;
       }
 
-      if (response.status >= 200  && response.status < 300) {
+      if (response.status >= 200 && response.status < 300) {
         localStorage.setItem("chat-app-user", JSON.stringify(data.user));
-       
         toast.success(data.message, toastOptions);
-        navigate("/setavatar"); // Redirect after successful registration
+        navigate("/setavatar");
       }
     } catch (error) {
       const errorMessage = error.response?.data?.message || "An error occurred";
       toast.error(errorMessage, toastOptions);
     }
-   
   };
 
   const handleValidation = () => {
@@ -98,37 +93,44 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="logo">logo</div>
-      <div>
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          onChange={handleChange}
-          value={formData.username}
-        />
+    <div className="login-container">
+      <div className="img-and-form-container">
+      <div className="image-container">
+        <img src="https://img.freepik.com/premium-vector/communication-via-chat-social-media-chating-flat-style-illustration-vector_538610-1619.jpg?w=740" alt="Login" />
       </div>
+      <form onSubmit={handleSubmit} className="form-container">
+        <div className="logo">ChatApp</div>
+        <div>
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            onChange={handleChange}
+            value={formData.username}
+          />
+        </div>
      
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          onChange={handleChange}
-          value={formData.password}
-        />
-      </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            onChange={handleChange}
+            value={formData.password}
+          />
+        </div>
 
-      <div>
-        <button type="submit">Login</button>
+        <div>
+          <button type="submit">Login</button>
+        </div>
+        <span>
+          Don't have an account? <Link to="/register">Register</Link>
+        </span>
+        <ToastContainer />
+      </form>
       </div>
-      <span>
-        Don't have an account? <Link to="/register">Register</Link>
-      </span>
-      <ToastContainer />
-    </form>
+    </div>
   );
 }

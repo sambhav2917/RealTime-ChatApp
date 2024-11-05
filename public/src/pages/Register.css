@@ -1,6 +1,84 @@
+/* Container for the Register page */
+.register-container {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    height: 100vh; /* Full viewport height */
+   /*  background-color: #a6d8f3;  *//* Light blue background */
+}
 
+/* Image container styling */
+.image-container {
+    width: 400px; /* Set width to match the form */
+    margin-right: 20px; /* Space between image and form */
+}
 
-form{
-    display: flex;
-    flex-direction: column;
+.image-container img {
+    width: 100%; /* Set image width to 100% to fit the container */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Optional: Rounded corners for the image */
+}
+
+/* Form container styling */
+.form-container-register {
+    background-color: white; /* White background for form */
+    padding: 30px; /* Padding for form */
+    border-radius: 10px; /* Rounded corners for the form */
+    width: 300px; /* Fixed width */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Box shadow for the form */
+}
+
+/* General input and button styling */
+input {
+    width: 95%; /* Adjusted width to fit the form */
+    padding: 10px; /* Padding for inputs */
+    margin: 10px 0; /* Margin between inputs */
+    border: 1px solid #ccc; /* Border for inputs */
+    border-radius: 5px; /* Rounded corners for inputs */
+}
+
+button {
+    width: 100%; /* Button width */
+    padding: 10px; /* Padding for button */
+    background-color: #0077cc; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners for button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Transition for hover effect */
+}
+
+button:hover {
+    background-color: #005f99; /* Darker button color on hover */
+}
+
+/* Logo styling */
+.logo {
+    font-size: 24px; /* Font size for logo */
+    font-weight: bold; /* Bold text for logo */
+    text-align: center; /* Center text */
+    margin-bottom: 20px; /* Space below logo */
+}
+
+/* Link styling */
+span {
+    display: block; /* Block display for links */
+    margin-top: 10px; /* Space above links */
+    text-align: center; /* Center text */
+}
+
+span a {
+    color: #0077cc; /* Link color */
+    text-decoration: none; /* No underline */
+}
+
+span a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Combined image and form container */
+.img-and-form-container {
+    display: flex; /* Flex container for image and form */
+    align-items: center; /* Center items vertically */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Box shadow for the container */
 }

@@ -1,0 +1,124 @@
+/* Container for the Home page */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-image: url('/images/Untitled design (5).png'); /* Path to your local image */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    background-blend-mode: multiply; /* Blend mode to tint without full blur */
+}
+
+/* Light tint effect directly on the image */
+.home-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+/* Navbar styling */
+.navbar {
+    display: flex;
+   
+    align-items: center;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 2;
+    position: relative;
+}
+
+.navbar h1 {
+    font-size: 24px;
+    color: #005f99;
+}
+
+.navbar-links {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-links li {
+    cursor: pointer;
+    color: #005f99;
+}
+
+/* Main content with text and button on the left */
+.main-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    flex-grow: 1;
+    padding: 0 40px;
+    z-index: 2;
+    position: relative;
+    transform: translateX(40px);
+}
+
+.text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 300px;
+    color: #003f5c;
+    background-color: rgba(255, 255, 255, 0.6); /* Add semi-transparent background only on text */
+    padding: 20px;
+    border-radius: 8px;
+    transform: translateX(20vw);
+}
+
+.text-content h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.text-content p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.get-started-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #0077cc;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.get-started-button:hover {
+    background-color: #005f99;
+}
+
+/* Footer styling */
+.footer {
+    padding: 10px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 2;
+    position: relative;
+    color: #003f5c;
+}
+.navbar-links li:hover {
+    
+    color: #0077cc;
+    
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions for both color and scale */
+    transform: scale(1.1); /* Slightly enlarges the element on hover */
+}
+
+.navbar-links li {
+    cursor: pointer;
+    font-size: large;
+}
