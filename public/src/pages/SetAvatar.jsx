@@ -89,7 +89,7 @@ export default function SetAvatar() {
                             </div>
                         ))}
                     </div>
-                    <button onClick={setProfilePicture}>Set as Profile Picture</button>
+                    <button onClick={setProfilePicture} className="avatar-button">Set as Profile Picture</button>
                 </div>
             )}
             <ToastContainer />
