@@ -7,7 +7,6 @@ import { Server } from 'socket.io';
 import userRouter from './routers/userRoutes.js';
 import apiRouter from './routers/apiRoutes.js';
 import messageRouter from './routers/messagesRoute.js';
-import { on } from 'events';
 
 dotenv.config();
 
@@ -16,10 +15,13 @@ const httpServer = createServer(app);
 
 // CORS configuration
 const corsOptions = {
-    origin:  process.env.NODE_ENV === 'production' ? 'https://real-time-chat-app-beta-lilac.vercel.app/' : 'http://localhost:5173',
+    origin: process.env.NODE_ENV === 'production' ? 'https://real-time-chat-app-beta-lilac.vercel.app' : 'http://localhost:5173', // Removed the trailing slash
     credentials: true, // Allow credentials (cookies)
 };
-console.log( process.env.NODE_ENV === 'production')
+
+// Log the current CORS options
+console.log('CORS Options:', corsOptions);
+
 // Middleware
 app.use(express.json());
 app.use(cors(corsOptions));
@@ -31,25 +33,26 @@ app.use('/proxy', apiRouter);
 app.use('/api/message', messageRouter);
 
 // MongoDB connection
-mongoose.connect(process.env.MONGO_URI).then(() => {
-    console.log('Connected to MongoDB');
-}).catch(error => {
-    console.log(error);
-});
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        console.log('Connected to MongoDB');
+    })
+    .catch(error => {
+        console.error('MongoDB connection error:', error);
+    });
 
 // Socket.io setup
 const io = new Server(httpServer, {
     cors: {
-        origin: 'http://localhost:5173',
+        origin: process.env.NODE_ENV === 'production' ? 'https://real-time-chat-app-beta-lilac.vercel.app' : 'http://localhost:5173',
         credentials: true,
     }
 });
 
-global.onlineUser= new Map();
+global.onlineUser = new Map();
 
 io.on('connection', (socket) => {
     console.log(`User connected: ${socket.id}`);
-
     global.chatSocket = socket;
 
     // Add user to online users map
@@ -57,7 +60,7 @@ io.on('connection', (socket) => {
         onlineUser.set(userId, socket.id);
         console.log(`User added: ${userId}, Socket ID: ${socket.id}`);
     });
-    
+
     socket.on('send-msg', (data) => {
         const sendUserSocket = onlineUser.get(data.to);
         console.log('Message sent:', data); // Log the sent message
@@ -70,22 +73,18 @@ io.on('connection', (socket) => {
             console.log(`User ${data.to} is not online`);
         }
     });
-    
 
     // Handle disconnection
-    
     socket.on('disconnect', () => {
-    console.log(`User disconnected: ${socket.id}`);
-    // Remove user from onlineUser map
-    onlineUser.forEach((value, key) => {
-        if (value === socket.id) {
-            onlineUser.delete(key);
-        }
+        console.log(`User disconnected: ${socket.id}`);
+        // Remove user from onlineUser map
+        onlineUser.forEach((value, key) => {
+            if (value === socket.id) {
+                onlineUser.delete(key);
+            }
+        });
     });
 });
-
-});
-
 
 // Start server
 const Port = process.env.PORT || 5000;
