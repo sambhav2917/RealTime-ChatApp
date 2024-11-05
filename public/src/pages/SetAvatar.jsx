@@ -43,7 +43,7 @@ export default function SetAvatar() {
                 user.isAvatarImageSet = true;
                 user.avatarImage = data.image;
                 localStorage.setItem("chat-app-user", JSON.stringify(user));
-                navigate("/");
+                navigate("/chat");
             }else{
                 toast.error("Error setting profile picture", toastOptions);
             }
@@ -55,7 +55,7 @@ export default function SetAvatar() {
         const fetchAvatars = async () => {
             const data = [];
             for (let index = 0; index < 4; index++) {
-                const imageurl = `http://localhost:5001/proxy/${Math.round(Math.random() * 1000)}`;
+                const imageurl = `https://realtime-chatapp-j1r8.onrender.com/proxy/${Math.round(Math.random() * 1000)}`;
                 const image = await axios.get(imageurl, { responseType: 'arraybuffer' });
                 const buffer = Buffer.from(image.data, 'binary');
                 data.push(buffer.toString('base64'));
