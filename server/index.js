@@ -16,10 +16,10 @@ const httpServer = createServer(app);
 
 // CORS configuration
 const corsOptions = {
-    origin: 'http://localhost:5173', // Your frontend URL
+    origin:  process.env.NODE_ENV === 'production' ? 'https://real-time-chat-app-beta-lilac.vercel.app/' : 'http://localhost:5173',
     credentials: true, // Allow credentials (cookies)
 };
-
+console.log( process.env.NODE_ENV === 'production')
 // Middleware
 app.use(express.json());
 app.use(cors(corsOptions));
