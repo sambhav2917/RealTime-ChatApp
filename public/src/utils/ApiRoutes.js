@@ -1,4 +1,5 @@
 export const host=  "https://realtime-chatapp-j1r8.onrender.com"
+/* export const host="http://localhost:5001" */
 export const RegisterRoute= `${host}/api/auth/register`
 export const LoginRoute= `${host}/api/auth/login`
 

@@ -1,19 +1,20 @@
+/* Container for input and button */
 .input-container {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px; /* Add some space between input and button */
-    width: 100%; /* Ensures the container itself is responsive */
-    padding: 5px; /* Adds padding for spacing */
+    gap: 10px; /* Space between input and button */
+    width: 100%; /* Makes the container responsive */
+    padding: 5px;
 }
 
 .input-container input {
-    flex-grow: 1; /* Allows input to take up available space */
-    width: 80%; /* Ensures a reactive width */
+    flex-grow: 1; /* Expands to available space */
+    width: 80%; /* Responsive width */
     padding: 10px;
     border: none;
     border-radius: 5px;
-    box-sizing: border-box; /* Prevents padding from affecting width */
+    box-sizing: border-box;
 }
 
 .input-container button {
@@ -24,28 +25,68 @@
     background-color: #4a76a8;
     color: white;
     font-weight: bold;
-    width: 6%;
+    width: auto; /* Responsive width */
 }
 
-.emoji{
+.emoji {
     cursor: pointer;
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
-   
-    color:black;
+    color: black;
     font-weight: bold;
     font-size: 20px;
 }
 
+/* Emoji picker styling */
 .emoji-picker {
     position: absolute;
-    top: 62%; /* Adjust based on your desired placement */
-    left: 29.2%; /* Adjust to center or align as needed */
-    transform: translate(-50%, -50%); /* Centers the picker relative to viewport */
-    z-index: 1000; /* Keeps it on top of other elements */
+    top: 62%; /* Adjust as needed */
+    left: 29.2%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
     overflow: auto;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     background-color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    
+    
+
+    .input-container button {
+        width: 20%; /* Full width button */
+        padding: 8px 10px;
+    }
+
+    .emoji {
+        font-size: 18px; /* Slightly smaller emoji for smaller screens */
+    }
+
+    .emoji-picker {
+        top: 60%; /* Adjust emoji picker placement */
+        left: 50%; /* Center picker for small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .input-container {
+        padding: 3px; /* Reduce padding for extra space */
+    }
+
+    .input-container input {
+        padding: 6px; /* Smaller padding for input */
+        font-size: 0.9rem; /* Smaller font size */
+    }
+
+    .input-container button {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    .emoji {
+        font-size: 16px; /* Smaller emoji icon */
+    }
 }

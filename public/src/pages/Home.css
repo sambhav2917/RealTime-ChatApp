@@ -24,7 +24,6 @@
 /* Navbar styling */
 .navbar {
     display: flex;
-   
     align-items: center;
     padding: 5px;
     background-color: rgba(255, 255, 255, 0.8);
@@ -53,7 +52,6 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-
     flex-grow: 1;
     padding: 0 40px;
     z-index: 2;
@@ -109,10 +107,9 @@
     position: relative;
     color: #003f5c;
 }
+
 .navbar-links li:hover {
-    
     color: #0077cc;
-    
     border-radius: 5px;
     transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions for both color and scale */
     transform: scale(1.1); /* Slightly enlarges the element on hover */
@@ -121,4 +118,63 @@
 .navbar-links li {
     cursor: pointer;
     font-size: large;
+}
+
+/* Mobile compatibility */
+@media (max-width: 768px) {
+    .home-container {
+        background-image: url('D:\RealTime ChatApp\public\images\background img.png'); /* Path to your local image */
+        background-size: cover;
+        background-position: center;
+        background-blend-mode: multiply; /* Blend mode to tint without full blur */
+    }
+    
+   
+
+    /* Adjust main content for mobile */
+    .main-content {
+        padding: 20px;
+        transform: translateX(0);
+        justify-content: center;
+        text-align: center;
+    }
+
+    .text-content {
+        max-width: 100%;
+        padding: 15px;
+        transform: translateX(0);
+    }
+
+    .text-content h2 {
+        font-size: 28px;
+    }
+
+    .text-content p {
+        font-size: 16px;
+    }
+
+    .get-started-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+/* Very small screens (like phones) */
+@media (max-width: 480px) {
+    .navbar h1 {
+        font-size: 18px;
+    }
+
+    .text-content h2 {
+        font-size: 24px;
+    }
+
+    .text-content p {
+        font-size: 14px;
+    }
+
+    .get-started-button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
 }

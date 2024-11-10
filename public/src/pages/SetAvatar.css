@@ -1,5 +1,4 @@
-/* SetAvatar.css */
-
+/* Container for the title */
 .title-container {
     text-align: center;
     margin-bottom: 20px;
@@ -10,11 +9,13 @@
     color: #333;
 }
 
+/* Avatar selection area */
 .avatars {
     display: flex;
     justify-content: center;
     gap: 1rem;
     margin-top: 20px;
+    flex-wrap: wrap; /* Allows avatars to wrap on smaller screens */
 }
 
 .avatar {
@@ -24,18 +25,24 @@
     border-radius: 50%;
     cursor: pointer;
     overflow: hidden;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, transform 0.3s ease;
 }
 
 .avatar img {
     width: 100%;
     height: 100%;
+    transition: transform 0.3s ease;
 }
 
 .avatar.selected {
     border-color: #4CAF50; /* Highlight selected avatar */
 }
 
+.avatar img:hover {
+    transform: scale(1.2); /* Scale up on hover */
+}
+
+/* Button styling */
 button {
     display: block;
     margin: 20px auto;
@@ -48,13 +55,57 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-.avatar-button{
-    width: 13%;
-}
+
 button:hover {
     background-color: #0056b3;
 }
 
-.avatar img:hover {
-    transform: scale(1.2);
+/* Avatar button width */
+.avatar-button {
+    width: 13%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .title-container h1 {
+        font-size: 1.3rem; /* Slightly smaller title */
+    }
+
+    .avatar {
+        width: 80px;
+        height: 80px; /* Smaller avatars for medium screens */
+    }
+
+    button {
+        padding: 8px 16px; /* Reduced padding */
+        font-size: 0.9rem;
+    }
+
+    .avatar-button {
+        width: 20%;
+    }
+}
+
+@media (max-width: 480px) {
+    .title-container h1 {
+        font-size: 1.2rem; /* Smaller title for small screens */
+    }
+
+    .avatar {
+        width: 60px;
+        height: 60px; /* Smaller avatars for mobile screens */
+    }
+
+    button {
+        padding: 6px 12px;
+        font-size: 0.8rem; /* Smaller button text */
+    }
+
+    .avatar-button {
+        width: 25%;
+    }
+
+    .avatars {
+        gap: 0.5rem; /* Reduced gap between avatars */
+    }
 }
