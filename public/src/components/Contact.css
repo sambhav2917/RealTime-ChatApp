@@ -1,5 +1,4 @@
-/* Contact.css */
-
+/* Global Styles */
 html, body {
     margin: 0;
     padding: 0;
@@ -7,78 +6,133 @@ html, body {
     height: 100%;
     width: 100%;
     box-sizing: border-box;
-  }
+}
 
 .container {
     display: flex;
     flex-direction: column;
-    height: 100vh; /* Full viewport height */
-    overflow: hidden; /* Prevents overflow beyond the container */
+    height: 100vh;
+    overflow: hidden;
 }
 
+/* Contacts List Styling */
 .contacts-list {
-    flex: 1; /* Takes up remaining space above the fixed section */
-    overflow-y: auto; /* Enables scrolling within the contact list */
-    padding: 20px; /* Increased padding for better spacing */
-    
-    background-color: #ffffff; /* Add background color for better contrast */
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .contact {
     display: flex;
     align-items: center;
-    padding: 15px; /* Increased padding for better touch targets */
-    border-radius: 8px; /* Rounded corners for a modern look */
-    border: 1px solid #e0e0e0; /* Light border for separation */
-    margin-bottom: 10px; /* Space between contacts */
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s; /* Added transition for hover effect */
+    transition: background-color 0.3s ease, transform 0.2s;
 }
 
 .contact:hover {
-    background-color: #f0f0f0; /* Light background on hover */
-    transform: scale(1.02); /* Slightly enlarge on hover */
+    background-color: #f0f0f0;
+    transform: scale(1.02);
 }
 
 .contact.selected {
-    background-color: #d0e6ff; /* Highlight selected contact */
+    background-color: #d0e6ff;
 }
 
 .contact img {
-    width: 50px; /* Increased width for better visibility */
-    height: 50px; /* Increased height for better visibility */
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    margin-right: 15px; /* Increased margin for spacing */
+    margin-right: 15px;
 }
 
 .contact h3 {
     margin: 0;
-    font-size: 1.1rem; /* Increased font size for better readability */
+    font-size: 1.1rem;
     color: #333;
 }
 
-/* Fixed Current User Section at Bottom */
+/* Current User Section at Bottom */
 .current-user {
     position: sticky;
     bottom: 0;
     background-color: #f8f8f8;
-    padding: 15px; /* Increased padding for aesthetics */
+    padding: 15px;
     display: flex;
     align-items: center;
     border-top: 1px solid #ddd;
-    height: 80px; /* Increased height for better spacing */
+    height: 80px;
 }
 
 .current-user .avatar img {
     margin-top: 10px;
-    width: 60px; /* Adjusted width for larger avatar */
-    height: 60px; /* Adjusted height for larger avatar */
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
 }
 
 .current-user .username h2 {
-    margin: 0 0 0 15px; /* Increased margin for better spacing */
-    font-size: 1.4rem; /* Increased font size for better visibility */
+    margin: 0 0 0 15px;
+    font-size: 1.4rem;
     color: #333;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .contact img {
+        width: 40px;
+        height: 40px; /* Smaller avatar for tablets */
+    }
+    
+    .contact h3 {
+        font-size: 1rem; /* Reduced font size */
+    }
+    
+    .current-user .avatar img {
+        width: 50px;
+        height: 50px; /* Reduced avatar size */
+    }
+    
+    .current-user .username h2 {
+        font-size: 1.2rem; /* Reduced font size */
+    }
+}
+
+@media (max-width: 480px) {
+    .contacts-list {
+        padding: 10px; /* Reduced padding for mobile */
+    }
+    
+    .contact {
+        padding: 10px; /* Smaller padding for contacts */
+        margin-bottom: 8px;
+    }
+
+    .contact img {
+        width: 35px;
+        height: 35px; /* Smaller avatar for mobile */
+    }
+
+    .contact h3 {
+        font-size: 0.9rem; /* Reduced font size for mobile */
+    }
+
+    .current-user {
+        padding: 10px; /* Reduced padding in current user section */
+        height: 70px; /* Adjusted height for mobile */
+    }
+
+    .current-user .avatar img {
+        width: 45px;
+        height: 45px; /* Adjusted avatar size */
+    }
+
+    .current-user .username h2 {
+        font-size: 1rem; /* Reduced font size */
+    }
 }

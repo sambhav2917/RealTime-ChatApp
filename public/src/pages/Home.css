@@ -123,7 +123,7 @@
 /* Mobile compatibility */
 @media (max-width: 768px) {
     .home-container {
-        background-image: url('D:\RealTime ChatApp\public\images\background img.png'); /* Path to your local image */
+        background-image: url('/images/background img.png'); /* Path to your local image */
         background-size: cover;
         background-position: center;
         background-blend-mode: multiply; /* Blend mode to tint without full blur */
